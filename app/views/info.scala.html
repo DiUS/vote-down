@@ -1,0 +1,76 @@
+@(mpd: org.bff.javampd.MPD)
+
+@********************@
+
+@format_time(secs: Long) = @{
+	val hr = secs / 3600; 
+	val min = (secs / 60) % 60; 
+	val sec = secs % 60;
+	 
+	"%d:%02d:%02d".format(hr, min, sec);
+}
+
+@dts = @{mpd.getMPDPlayer().getAudioDetails}
+
+@main(routes.Application.info()) {
+    
+	<h1>@Messages("project.name") <span class="glyphicon glyphicon-info-sign"></span></h1>
+
+	<h3>Outputs</h3>
+	
+	<dl class="dl-horizontal">
+		@for(output <- mpd.getMPDAdmin.getOutputs) {
+			<dt>@output.getName</dt>
+			<dd><input class="output" type="checkbox" id="output@output.getId" data-id="@output.getId" @if(output.isEnabled) { checked }></dd>
+		}
+	<dl/>
+	
+	<script>
+	    $(function() 
+        {
+			$(".output").click(function() {
+				var id = $(this).data("id");
+				var checked = $(this).is(':checked');
+				
+				jsRoutes.controllers.Application.toggleOutput(id, checked).ajax(
+				{
+					error: function(html) { showAlert("error", html.responseText); },
+					success: function(html) { showAlert("success", "Output " + (checked ? "enabled" : "disabled")); }
+				});
+			});        
+		});
+	</script>
+
+	<h3>Public info</h3>
+
+	<dl class="dl-horizontal">
+      
+		<dt>@Messages("info.uptime")</dt>
+		<dd>@format_time(mpd.getUptime)</dd>
+
+		<dt>Sample Rate</dt>
+		<dd>@if(dts != null) {@dts.getSampleRate Hz} else {-}</dd>
+		
+		<dt>Precision</dt>
+		<dd>@if(dts != null) {@dts.getBits Bit} else {-}</dd>
+		
+		<dt>Channels</dt>
+		<dd>@if(dts != null) {@dts.getChannels} else {-}</dd>
+ 
+		<dt>Play!</dt>
+		<dd>@play.core.PlayVersion.current</dd>
+		  
+		<dt>Scala</dt>
+		<dd>@play.core.PlayVersion.scalaVersion</dd>
+		 
+		<dt>MPD</dt>
+		<dd>@mpd.getVersion</dd>
+	</dl>
+    
+    <h3>Internal info</h3>
+    <dl class="dl-horizontal">
+      @for((key, value) <- mpd.getStatus) { <dt>@key</dt><dd>@value</dd> }
+    </dl>
+}
+
+            

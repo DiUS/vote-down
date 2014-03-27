@@ -1,0 +1,120 @@
+@(savedlists: List[org.bff.javampd.objects.MPDSavedPlaylist])
+@import org.bff.javampd.MPDPlayer.PlayerStatus._;
+
+@current = {"current"}
+
+@main(routes.Application.playlists()) {
+
+    @if(savedlists.isEmpty) {    
+        <div class="well">
+            <em>Nothing to display</em>
+        </div>   
+    } else {
+     <div class="container col-xs-3 col-sm-3 col-md-3">  
+		<ul id="playlist-list" class="nav nav-pills nav-stacked">
+            @for(list <- savedlists) {
+                <li data-name="@list.getName()" class="playlist" >
+                    <a href="#">@list.getName()
+                      <span class="badge pull-right">@list.getSongs().size()</span>
+                    </a>
+                </li>
+            }
+
+
+		</ul>
+		</div>
+
+        <div class="container col-xs-9 col-sm-9 col-md-9">
+        <div class="panel panel-default">
+		  <div class="panel-heading"><span id="panel-title">Panel heading without title</span>
+		  
+             <a style="margin-left:5px" class="btn btn-xs btn-danger pull-right" id="remove" title="@Messages("playlists.remove")" href="#">
+                Remove <span class="glyphicon glyphicon-trash"></span>
+             </a>
+             <a class="btn btn-xs btn-default pull-right" id="activate" title="@Messages("playlists.activate")" href="#">
+                Activate <span class="glyphicon glyphicon-ok"></span>
+             </a>
+		  
+		  </div>
+  		  <ul id="playlist-songs" class="list-group">
+		  </ul>
+		</div>
+		</div>
+	}
+	
+    <script type="text/javascript" charset="utf-8">
+    	var currentPlaylist;
+    
+        $(function() 
+        {
+        	$('#activate').click(function()
+        	{
+				jsRoutes.controllers.Application.playlistLoad(currentPlaylist).ajax(
+				{
+					error: function(html) { showAlert("error", html.responseText); },
+					success: function(html) { showAlert("success", "Playlist loaded!"); }
+				});        		
+        	});
+
+        	$('#remove').click(function()
+        	{
+				jsRoutes.controllers.Application.playlistDelete(currentPlaylist).ajax(
+				{
+					error: function(html) { showAlert("error", html.responseText); },
+					success: function(html) 
+					{ 
+						showAlert("success", "Playlist deleted!"); 
+
+						// remove current(=deleted) entry
+						var ele = $('.playlist[data-name="' + currentPlaylist + '"]');					
+						ele.remove();
+						
+						// select first entry
+        				var id = $('.playlist:first').data("name");
+        				selectPlaylist(id);
+					}
+				});      		
+        	});
+        
+			$('.playlist').click(function()
+			{
+    			var id = $(this).data("name");
+    			
+    			selectPlaylist(id);
+			});
+			
+			// There is at least one child, otherwise this page wouldn't be shown
+			var firstList = $("#playlist-list").children(0);
+			selectPlaylist(firstList.data('name'));
+		});
+		
+		function selectPlaylist(id)
+		{
+			currentPlaylist = id;
+			
+			// use jQuery selector on "name" attribute
+			var ele = $('.playlist[data-name="' + id + '"]');
+			
+			ele.addClass('active').siblings().removeClass('active');
+			
+			$("#panel-title").html(id);
+
+ 			jsRoutes.controllers.Application.playlistContent(id).ajax(
+ 			{
+ 				success: function(data) 
+ 				{ 
+					$("#playlist-songs").empty();
+					
+					for ( var i = 0; i < data.length; i++ ) 
+					{
+						// I would have preferred to create a "li" element and add it to the parent "ul"
+						// instead of string concatenation, but I don't know how ..
+						$("#playlist-songs").append("<li class='list-group-item'>" + data[i].file + "</li>\n");
+					}
+ 				}
+ 			});
+		
+		}		    
+	</script>
+}
+            

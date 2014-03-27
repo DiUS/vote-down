@@ -1,0 +1,58 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Default path will just redirect to the computer list
+GET     /                           controllers.Application.index()
+
+# Login
+GET     /login                      controllers.Credential.login
+POST    /login                      controllers.Credential.authenticate
+GET     /logout                     controllers.Credential.logout
+
+# Playlist (look at the default values for pagination parameters)
+GET     /playlist                   controllers.Application.playlist(p:Int ?= 0)
+
+# MPD Connection
+GET     /update                     controllers.Application.updateDb()
+GET     /prevsong                   controllers.Application.prevSong()
+GET     /playsong                   controllers.Application.playSong()
+GET     /nextsong                   controllers.Application.nextSong()
+GET     /stopsong                   controllers.Application.stopSong()
+POST    /selectsong/:pos            controllers.Application.selectSong(pos:Int)
+POST    /setsongpos/:pos            controllers.Application.setSongPos(pos:Int)
+GET     /remove/:id			        controllers.Application.remove(id:Int)
+GET		/toggleShuffle				controllers.Application.toggleShuffle()
+GET		/toggleRepeat				controllers.Application.toggleRepeat()
+GET		/toggleConsuming			controllers.Application.toggleConsuming()
+GET		/toggleSingleMode			controllers.Application.toggleSingleMode()
+
+# Volume control
+POST    /volume/:amount             controllers.Application.setVolume(amount:Int)
+
+# Add computer
+GET     /addUrl           			controllers.Application.addUrl(url:String)
+GET     /addDbEntry        			controllers.Application.addDbEntry(url:String)
+GET     /browseDb         			controllers.Application.browseDb(pageIdx:Int ?= 0, sortKey ?= "name", order ?= "asc", filter ?= "")
+
+# Info
+GET		/info						controllers.Application.info()
+POST    /toggleOutput/:id           controllers.Application.toggleOutput(id:Int, checked:Boolean)
+
+# Playlists
+GET		/playlists					controllers.Application.playlists()
+GET		/playlist-content/:id		controllers.Application.playlistContent(id:String)
+GET		/playlist-load/:id			controllers.Application.playlistLoad(id:String)
+GET		/playlist-save/:id			controllers.Application.playlistSave(id:String)
+GET		/playlist-delete/:id		controllers.Application.playlistDelete(id:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# JavaScript Routes
+# for some reason the path can be arbitrary but must not contain slashes
+# However, the code in the samples does and it works there
+GET     /jsRoutes.js				controllers.Application.javascriptRoutes()
+
+# Websocket
+GET     /websocket                  controllers.App.sockHandler()

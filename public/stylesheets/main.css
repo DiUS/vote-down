@@ -1,0 +1,114 @@
+html {
+    background: #eee;
+}
+
+section#main {
+    position: relative;
+}
+
+/* Add some space and a "closing" horizontal line at the bottom */
+footer 
+{
+    border-bottom: 1px solid #ccc;
+	min-height: 25px;
+} 
+
+#playlist th.pos {
+	width: 30px;
+}
+
+#playlist .pos {
+	text-align:center;
+}
+
+#playlist th.title {
+    width: 25%;
+    min-width: 80px;
+}
+
+#playlist th.remove {
+	width: 40px;
+}
+
+/* Color for the selected playlist row */
+#playlist tbody tr.highlight td 
+{
+	background-color:#c8c8ff;
+}
+
+/* Color for the hovered playlist row */
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover 
+{
+  background-color: #e8e8ff;
+}
+
+/* Background color for buttons that are pressed */
+.button-down 
+{
+	background-color:#beb;
+}
+
+#playsong {
+	text-align: center;
+	width: 60px;
+}
+
+table#controls {
+	width: 100%;
+}
+
+#control-buttons {
+	width:350px;
+}
+
+/* Override song pos. slider background with custom image */
+#songpos-slider .ui-slider-range 
+{
+	background: #cc9c5c url(ui-bg_gloss-wave_55_5c9ccc_60x12.png) repeat-x;
+}
+
+/* Override volume slider background with custom image */
+#volume-slider .ui-slider-range 
+{
+	background: #cc9c5c url(ui-bg_gloss-wave_55_cc9c5c_60x12.png) repeat-x;
+}
+
+
+#volume-icon 
+{
+	font-size:1.5em;
+}
+
+#volume 
+{
+	width:25px;
+}
+
+/* A general class for elements that can't be selected (text selection) */
+.unselectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none;
+	-ms-user-select: none;
+
+	cursor:default; 
+}
+
+/* Plus icon color item that are already in the playlist */
+#database .inplaylist
+{
+	color:lightgray;
+}
+
+/* Plus icon color item that are not already in the playlist */
+#database .notinplaylist
+{
+	color:green;
+}
+
+/* Never wrap text in table headers */
+#database th
+{
+	white-space:nowrap;
+}

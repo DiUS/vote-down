@@ -1,0 +1,27 @@
+# Messages
+
+project.name=Play! MPC
+
+playlist.title=Playlist
+playlist.addurl=Add URL to playlist
+
+playlist.save=Save playlist
+playlist.remove=Remove from playlist
+
+playlist.prev=Go back one track
+playlist.next=Go to next track
+playlist.play=Play / Pause
+playlist.stop=Stop playback
+playlist.repeat=Toggle Repeat
+playlist.shuffle=Toggle Shuffle
+playlist.single=Toggle Single Mode\nPlay only one song
+playlist.consume=Toggle Consume\nRemove song after playback
+
+database.list.title={0,choice,0#No songs|1#One song|1<{0,number,integer} songs} found
+database.add=Add item to playlist
+
+playlists.remove=Remove playlist
+playlists.activate=Use this playlist\ncurrent playlist will be overwritten
+ 
+info.uptime=Uptime
+info.status=Status
