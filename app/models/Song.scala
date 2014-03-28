@@ -1,3 +1,5 @@
 package models
 
-case class Song(name: String)
+case class Song(name: String) {
+  def votes: Int = ???
+}

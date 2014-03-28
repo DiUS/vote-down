@@ -1,6 +1,7 @@
 package models
 
 object DataStore {
+  //note: THIS IS BAD, NEVER EVER DO THIS
   var data: Map[String, Song] = Map()
 
   def addSong(s:Song) {
