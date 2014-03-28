@@ -7,8 +7,8 @@ import org.bff.javampd.objects.MPDSong
 
 
 object Playlist {
-  def nextSong(justFinished:Song, playlist: List[Song]) = {
-    playlist.sortBy(_.voteDown).dropWhile(_ != justFinished).tail.headOption.getOrElse(playlist.head)
+  def nextSong(justFinished:Song, playlist: Iterable[Song]) = {
+    playlist.toList.sortBy(_.downVotesCount).dropWhile(_ != justFinished).tail.headOption.getOrElse(playlist.head)
   }
 }
 
@@ -18,7 +18,7 @@ case class Playlist(mpd: MPD) {
   def database: Iterable[MPDSong] = mpd.getMPDDatabase.listAllSongs
   
   def update(justFinished: MPDSong, 
-             playlist: List[Song]) = {
+             playlist: Iterable[Song]) = {
     val next = Playlist.nextSong(Song(justFinished), playlist)
     database.find(_ == next).foreach { song =>
       playNext(queue, player, song)
