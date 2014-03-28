@@ -33,7 +33,7 @@ POST    /volume/:amount             controllers.Application.setVolume(amount:Int
 # Add computer
 GET     /addUrl           			controllers.Application.addUrl(url:String)
 GET     /addDbEntry        			controllers.Application.addDbEntry(url:String)
-POST    /voteDown        			controllers.Application.voteDown(url:String)
+POST    /voteDown        			controllers.SongController.voteDown(name:String)
 GET     /browseDb         			controllers.Application.browseDb(pageIdx:Int ?= 0, sortKey ?= "name", order ?= "asc", filter ?= "")
 
 # Info

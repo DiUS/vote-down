@@ -65,7 +65,7 @@ $(function()
 		var href = $(this).data("ref");
 		var elem = $(this);
 
-		jsRoutes.controllers.Application.voteDown(href).ajax(
+		jsRoutes.controllers.SongController.voteDown(href).ajax(
 		{
 			// reload, so that the "flash" error message is displayed
 			error: function(html) { window.location.reload(); },

@@ -5,6 +5,7 @@ object DataStore {
   var data: Map[String, Song] = Map()
 
   def addSong(song:Song) {
+    println(s"Adding song ${song.name}")
     data = data.+(song.name -> song)
   }
 
