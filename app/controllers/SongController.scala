@@ -10,8 +10,8 @@ object SongController extends Song
 class Song extends Controller {
 
   def voteDown(name:String) = Action {
-    println(s"Voting down ${name}")
-    DataStore.findSong(name).foreach(song => println(song.name))
+    println(s"Voting down ${DataStore.findSong(name)}")
+    DataStore.findSong(name).map(_.voteDown).map(DataStore.upsertSong)
     Ok(Json.obj())
   }
 }

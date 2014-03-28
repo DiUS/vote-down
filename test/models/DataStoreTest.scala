@@ -6,7 +6,7 @@ class DataStoreTest extends PlaySpecification {
 
     DataStore.clearSongs()
     val song = new Song("Smells like teen spirit")
-    DataStore.addSong(song)
+    DataStore.upsertSong(song)
 
     "test a thing" in {
       DataStore.findSong("Smells like teen spirit") must beSome(song)

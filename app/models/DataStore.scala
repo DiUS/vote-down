@@ -4,9 +4,9 @@ object DataStore {
   //note: THIS IS BAD, NEVER EVER DO THIS
   var data: Map[String, Song] = Map()
 
-  def addSong(song:Song) {
-    println(s"Adding song ${song.name}")
-    data = data.+(song.name -> song)
+  def upsertSong(song:Song) {
+    println(s"Upserting song ${song.file}")
+    data = data.+(song.file -> song)
   }
 
   def removeSong(song:Song) {

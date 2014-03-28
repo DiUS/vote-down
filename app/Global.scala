@@ -11,7 +11,7 @@ object Global extends GlobalSettings {
 
   override def onStart(app: Application) {
     println("Starting application")
-    MpdMonitor.getInstance.getMPD.getMPDDatabase.listAllSongs.map(Song.apply).foreach(DataStore.addSong)
+    MpdMonitor.getInstance.getMPD.getMPDDatabase.listAllSongs.map(Song.apply).foreach(DataStore.upsertSong)
   }
 
   override def onStop(app: Application) {
