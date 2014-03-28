@@ -78,6 +78,11 @@
                     			@if(playlistfiles.contains(song.getFile)) {inplaylist} else {notinplaylist}">
                     	</a>
                     </td>
+                    <td>
+                        <a href="#" data-ref="@song.getFile()" class="voteDown">
+                            <img src="/assets/images/vote_down.jpeg"/></td>
+                        </a>
+
                 </tr>
             }
 

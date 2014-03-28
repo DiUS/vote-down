@@ -215,6 +215,7 @@ public class Application extends Controller
 	            controllers.routes.javascript.Application.setSongPos(),
 	            controllers.routes.javascript.Application.addUrl(),
 	            controllers.routes.javascript.Application.addDbEntry(),
+	            controllers.routes.javascript.Application.voteDown(),
 	            controllers.routes.javascript.Application.remove(),
 
 	            controllers.routes.javascript.Application.playlistContent(),
@@ -467,6 +468,14 @@ public class Application extends Controller
 			return notFound(path);
 		}		
 	}
+
+
+    public static Result voteDown(String path)
+    {
+         Logger.info("Voting down song: " + path);
+         return ok(path);
+    }
+
 
 	/**
 	 * Performs GET /playSong

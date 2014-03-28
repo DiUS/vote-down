@@ -60,6 +60,19 @@ $(function()
 		});
 	});
 
+	$('#database').on('click', '.voteDown', function(event)
+	{
+		var href = $(this).data("ref");
+		var elem = $(this);
+
+		jsRoutes.controllers.Application.voteDown(href).ajax(
+		{
+			// reload, so that the "flash" error message is displayed
+			error: function(html) { window.location.reload(); },
+			success: function(html) { alert("Voted down!!!! Sucky song registered.") }
+		});
+	});
+
     // Add onClick handler for all playlist table rows
 	$('#playlist').on('click', 'tbody tr', function(event) 
 	{
