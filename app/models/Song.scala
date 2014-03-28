@@ -8,10 +8,14 @@ object Song {
   }
 }
 
-case class Song(name: String, file: String, downVotesCount: Int = 0) {
+case class Song(name: String, file: String, downVotes: Set[DownVote] = Set()) {
 
-  def voteDown = {
-    this.copy(downVotesCount = downVotesCount + 1)
+  def voteDown(username:String) = {
+    this.copy(downVotes = downVotes.+(DownVote(username)))
   }
 
+
+  override def toString = {
+    s"${file} with ${downVotes.map( vote => s"${vote}")}"
+  }
 }

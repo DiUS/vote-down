@@ -5,7 +5,7 @@ object DataStore {
   var data: Map[String, Song] = Map()
 
   def upsertSong(song:Song) {
-    println(s"Upserting song ${song.file}")
+    println(s"Upserting song ${song}")
     data = data.+(song.file -> song)
   }
 

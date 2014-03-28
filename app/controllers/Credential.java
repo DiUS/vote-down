@@ -44,10 +44,14 @@ public class Credential extends Controller
 				String username = config.getString("login.user");
 				String userpass = config.getString("login.pass");
 				
-				if (Objects.equals(username, email) && 
-					Objects.equals(userpass, digest))
-					return null;
-				
+//				if (Objects.equals(username, email) &&
+//					Objects.equals(userpass, digest))
+//					return null;
+
+                // Beth: Let anyone log in for now, just need an email to store a vote against.
+                if (true) {
+                    return null;
+                }
 				return "Invalid user or password";
 			}
 			catch (NoSuchAlgorithmException e)
