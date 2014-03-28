@@ -4,11 +4,19 @@ object DataStore {
   //note: THIS IS BAD, NEVER EVER DO THIS
   var data: Map[String, Song] = Map()
 
-  def addSong(s:Song) {
-    data = data.+(s.name -> s)
+  def addSong(song:Song) {
+    data = data.+(song.name -> song)
   }
 
-  def removeSong(s:Song) {
-    data = data - s.name
+  def removeSong(song:Song) {
+    data = data - song.name
+  }
+
+  def findSong(name:String):Option[Song] = {
+    data.get(name)
+  }
+
+  def clearSongs() {
+    data = Map()
   }
 }
