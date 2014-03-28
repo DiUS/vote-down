@@ -69,7 +69,7 @@ $(function()
 		{
 			// reload, so that the "flash" error message is displayed
 			error: function(html) { window.location.reload(); },
-			success: function(html) { alert("Voted down!!!! Sucky song registered.") }
+			success: function(html) { window.location.reload(); }
 		});
 	});
 
