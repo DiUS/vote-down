@@ -8,7 +8,7 @@ import org.bff.javampd.objects.MPDSong
 
 object Playlist {
   def list(playlist: Iterable[Song]) = {
-    playlist.filter(_.downVotesCount < 1)
+    playlist.filter(_.downVotesCount < 2)
   }
 
   def nextSong(justFinished:Song, playlist: Iterable[Song]): Song = {
