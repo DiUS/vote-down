@@ -63,6 +63,7 @@
                 @header("file", "File")
                 <th></th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -83,6 +84,9 @@
                         <a href="#" data-ref="@song.getFile()" class="voteDown">
                             <img src="/assets/images/vote_down.jpeg"/>
                         </a>
+                    </td>
+                    <td>
+                        @DataStore.findSong(song.getFile()).fold(0)(_.downVotesCount)
                     </td>
                 </tr>
             }
