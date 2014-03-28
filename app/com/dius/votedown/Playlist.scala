@@ -12,7 +12,12 @@ object Playlist {
   }
 
   def nextSong(justFinished:Song, playlist: Iterable[Song]): Song = {
-    list(playlist).toList.sortBy(_.downVotesCount).dropWhile(_ != justFinished).tail.headOption.getOrElse(playlist.head)
+    val left = list(playlist).toList.sortBy(_.downVotesCount).dropWhile(_ != justFinished)
+    if(left.isEmpty) {
+      playlist.head
+    } else {
+      left.tail.head
+    }
   }
 }
 
