@@ -40,7 +40,7 @@ object PlaylistController extends Controller {
 
     player.stop()
     playlist.clearPlaylist()
-//    playlist.addSong(DataStore.data.values.head)
+    playlist.addSong(database.listAllSongs().head)
     player.play()
 
     Ok("woo")
