@@ -7,8 +7,12 @@ import org.bff.javampd.objects.MPDSong
 
 
 object Playlist {
+  def list(playlist: Iterable[Song]) = {
+    playlist.filter(_.downVotesCount < 1)
+  }
+
   def nextSong(justFinished:Song, playlist: Iterable[Song]): Song = {
-    playlist.toList.sortBy(_.downVotesCount).dropWhile(_ != justFinished).tail.headOption.getOrElse(playlist.head)
+    list(playlist).toList.sortBy(_.downVotesCount).dropWhile(_ != justFinished).tail.headOption.getOrElse(playlist.head)
   }
 }
 
