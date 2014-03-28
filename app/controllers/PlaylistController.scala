@@ -20,23 +20,23 @@ object PlaylistController extends Controller {
 
   def monitor = MpdMonitor.getInstance.getMonitor
 
+  def next(e: PlaylistBasicChangeEvent) {
+    println("finished, playing next")
+    val justFinished = playlist.getSongList.head
+    val allSongs = DataStore.data.values
+    Playlist(mpd).update(justFinished, allSongs)
+  }
+
   def manage = Action { request =>
-    val songPromise = Promise[PlaylistBasicChangeEvent]()
 
     monitor.addPlaylistChangeListener(new PlaylistBasicChangeListener {
       def playlistBasicChange(event: PlaylistBasicChangeEvent) = {
+        println(s"playlist event:${event.getId}")
         if(event.getId == PlaylistBasicChangeEvent.PLAYLIST_ENDED) {
-          songPromise.success(event)
+          next(event)
         }
       }
     })
-
-    songPromise.future.onComplete { e =>
-      println("finished, playing next")
-      val justFinished = playlist.getSongList.head
-      val allSongs = DataStore.data.values
-      Playlist(mpd).update(justFinished, allSongs)
-    } (Implicits.defaultContext)
 
     player.stop()
     playlist.clearPlaylist()
