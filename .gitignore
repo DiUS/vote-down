@@ -8,8 +8,12 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
+test/resources/samples
 
 # idea specific
 .idea
 *.iml
 .settings
+
+#mac specific
+.DS_Store
