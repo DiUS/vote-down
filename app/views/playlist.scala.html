@@ -54,6 +54,7 @@
                     @header("genre", "Genre")
                     @header("year", "Year")
                     @header("remove", "")
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -70,6 +71,11 @@
                         	href="#" data-pos="@song.getPosition()">
                         	<span class="glyphicon glyphicon-trash"></span>
                         </a></td>
+                        <td>
+                            <a href="#" data-ref="@song.getFile()" class="voteDown">
+                                <img src="/assets/images/vote_down.jpeg"/>
+                            </a>
+                        </td>
                     </tr>
                 }
 

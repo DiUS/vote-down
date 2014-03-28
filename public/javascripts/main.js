@@ -60,7 +60,7 @@ $(function()
 		});
 	});
 
-	$('#database').on('click', '.voteDown', function(event)
+	$('#database, #playlist').on('click', '.voteDown', function(event)
 	{
 		var href = $(this).data("ref");
 		var elem = $(this);

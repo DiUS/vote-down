@@ -18,4 +18,8 @@ case class Song(name: String, file: String, downVotes: Set[DownVote] = Set()) {
   override def toString = {
     s"${file} with ${downVotes.map( vote => s"${vote}")}"
   }
+
+  def downVotesCount = {
+    downVotes.size
+  }
 }
